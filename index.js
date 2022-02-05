@@ -34,6 +34,10 @@ app.get('/talker', (_req, res) => {
     });
 });
 
+const TALKER_NOT_FOUND = {
+  message: 'Pessoa palestrante não encontrada',
+};
+
 app.get('/talker/:id', (req, res) => {
   const { id } = req.params;
   fs.readFile(TALKERFILE)
@@ -41,7 +45,7 @@ app.get('/talker/:id', (req, res) => {
       const parsedTalkers = JSON.parse(talkers);
       const talkerById = parsedTalkers.find((talker) => talker.id === parseInt(id, 10));
       return !talkerById
-      ? res.status(HTTP_NOT_FOUND).json({ message: 'Pessoa palestrante não encontrada' })
+      ? res.status(HTTP_NOT_FOUND).json(TALKER_NOT_FOUND)
       : res.status(HTTP_OK_STATUS).json(talkerById);
     })
     .catch((error) => {
