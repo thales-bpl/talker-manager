@@ -7,6 +7,7 @@ const {
   getTalkerById,
   postTalker,
   putTalker,
+  deleteTalker,
 } = require('../talker/talkerController');
 
 const {
@@ -21,6 +22,8 @@ const {
 router.get('/', getAllTalkers);
 
 router.get('/:id', getTalkerById);
+
+router.delete('/:id', validateToken, deleteTalker);
 
 router.put(
   '/:id',

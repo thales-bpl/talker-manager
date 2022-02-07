@@ -4,19 +4,23 @@ const TALKER_JSON_FILE = './talker.json';
 
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;
+const HTTP_NO_CONTENT = 204;
 const HTTP_NOT_FOUND = 404;
 
 const TALKER_NOT_FOUND = {
   message: 'Pessoa palestrante não encontrada',
 };
 
-const READ_ERROR = (error) => `Unable to read: ${TALKER_JSON_FILE}.
+const READ_ERROR = (error) => `Unable to read file: ${TALKER_JSON_FILE}.
 ${error}`;
 
 const POST_ERROR = (error) => `Failed to post talker.
 ${error}`;
 
 const PUT_ERROR = (error) => `Unable to edit talker.
+${error}`;
+
+const DELETE_ERROR = (error) => `Unable to delete talker.
 ${error}`;
 
 exports.getAllTalkers = (_req, res) => {
@@ -77,9 +81,22 @@ exports.putTalker = (req, res) => {
       fs.writeFile(TALKER_JSON_FILE, JSON.stringify([...talkers, newTalker]));
       return newTalker;
     })
-    .then((edittedTalkers) => res.status(HTTP_OK).json(edittedTalkers))
+    .then((updtTalkers) => res.status(HTTP_OK).json(updtTalkers))
     .catch((error) => {
       console.error(PUT_ERROR(error));
       process.exit(1);
     });
+};
+
+exports.deleteTalker = (req, res) => {
+  const { id } = req.params;
+  fs.readFile(TALKER_JSON_FILE)
+  .then((talkers) => JSON.parse(talkers))
+  .then((talkers) => talkers.filter((talker) => talker.id !== parseInt(id, 10)))
+  .then((updtTalkers) => fs.writeFile(TALKER_JSON_FILE, JSON.stringify([updtTalkers])))
+  .then(() => res.status(HTTP_NO_CONTENT).json())
+  .catch((error) => {
+    console.error(DELETE_ERROR(error));
+    process.exit(1);
+  });
 };

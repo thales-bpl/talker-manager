@@ -65,7 +65,7 @@ exports.validateAge = (req, res, next) => {
   next();
 };
 
-// créditos lógica do if: Weltom Thomas
+// crédito lógica do if: Weltom Thomas
 // src: https://github.com/tryber/sd-014-b-project-talker-manager/edit/thomas-project-talker-manager/controllers/talkerController.js
 exports.validateTalk = (req, res, next) => {
   const { talk } = req.body;

@@ -1,8 +1,6 @@
 const validator = require('email-validator');
 const PasswordValidator = require('password-validator');
 const randtoken = require('rand-token');
-// crédito para Welton Thomas pelos node packages
-// src: https://github.com/tryber/sd-014-b-project-talker-manager/blob/b21fa49586916d8912140711c6e36b4d874f6380/controllers/loginController.js
 
 const HTTP_OK = 200;
 const HTTP_BAD_REQUEST = 400;
