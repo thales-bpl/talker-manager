@@ -16,6 +16,9 @@ ${error}`;
 const POST_ERROR = (error) => `Failed to post talker.
 ${error}`;
 
+const PUT_ERROR = (error) => `Unable to edit talker.
+${error}`;
+
 exports.getAllTalkers = (_req, res) => {
   fs.readFile(TALKER_JSON_FILE)
     .then((talkers) => JSON.parse(talkers))
@@ -52,16 +55,31 @@ exports.postTalker = (req, res) => {
   fs.readFile(TALKER_JSON_FILE)
     .then((talkers) => JSON.parse(talkers))
     .then((talkers) => {
-      const newTalker = {
-        id: talkers.length + 1,
-        ...body,
-      };
+      const newTalker = { id: talkers.length + 1, ...body };
       fs.writeFile(TALKER_JSON_FILE, JSON.stringify([...talkers, newTalker]));
       return newTalker;
     })
     .then((newTalker) => res.status(HTTP_CREATED).json(newTalker))
     .catch((error) => {
       console.error(POST_ERROR(error));
+      process.exit(1);
+    });
+};
+
+exports.putTalker = (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
+  fs.readFile(TALKER_JSON_FILE)
+    .then((talkers) => JSON.parse(talkers))
+    .then((talkers) => talkers.filter((talker) => talker.id !== parseInt(id, 10)))
+    .then((talkers) => {
+      const newTalker = { id: parseInt(id, 10), ...body };
+      fs.writeFile(TALKER_JSON_FILE, JSON.stringify([...talkers, newTalker]));
+      return newTalker;
+    })
+    .then((edittedTalkers) => res.status(HTTP_OK).json(edittedTalkers))
+    .catch((error) => {
+      console.error(PUT_ERROR(error));
       process.exit(1);
     });
 };

@@ -6,6 +6,7 @@ const {
   getAllTalkers,
   getTalkerById,
   postTalker,
+  putTalker,
 } = require('../talker/talkerController');
 
 const {
@@ -20,6 +21,17 @@ const {
 router.get('/', getAllTalkers);
 
 router.get('/:id', getTalkerById);
+
+router.put(
+  '/:id',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatch,
+  validateRate,
+  putTalker,
+);
 
 router.post(
   '/',

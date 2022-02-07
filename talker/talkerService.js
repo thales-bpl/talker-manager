@@ -65,9 +65,11 @@ exports.validateAge = (req, res, next) => {
   next();
 };
 
+// créditos lógica do if: Weltom Thomas
+// src: https://github.com/tryber/sd-014-b-project-talker-manager/edit/thomas-project-talker-manager/controllers/talkerController.js
 exports.validateTalk = (req, res, next) => {
   const { talk } = req.body;
-  if (!(talk && talk.rate && talk.watchedAt)) { 
+  if (!talk || !talk.watchedAt || (!talk.rate && talk.rate !== 0)) { 
     return res.status(HTTP_BAD_REQUEST).json(INVALID_TALK);
   }
   next();
