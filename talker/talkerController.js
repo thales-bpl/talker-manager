@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const TALKER_FILE = './talker.json';
+const TALKER_JSON_FILE = './talker.json';
 
 const HTTP_OK = 200;
 const HTTP_NOT_FOUND = 404;
@@ -9,8 +9,11 @@ const TALKER_NOT_FOUND = {
   message: 'Pessoa palestrante não encontrada',
 };
 
+const LOG_ERROR = (error) => `Unable to read: ${TALKER_JSON_FILE}.
+${error}`;
+
 exports.getAllTalkers = (_req, res) => {
-  fs.readFile(TALKER_FILE)
+  fs.readFile(TALKER_JSON_FILE)
     .then((talkers) => {
       const parsedTalkers = JSON.parse(talkers);
       console.log(`Talkers disponíveis: ${parsedTalkers}`);
@@ -19,14 +22,14 @@ exports.getAllTalkers = (_req, res) => {
       : res.status(HTTP_OK).json(parsedTalkers);
     })
     .catch((error) => {
-      console.error(`Não foi possível ler o arquivo ${TALKER_FILE}. Erro: ${error}`);
+      console.error(LOG_ERROR(error));
       process.exit(1);
     });
   };
 
 exports.getTalkerById = (req, res) => {
   const { id } = req.params;
-  fs.readFile(TALKER_FILE)
+  fs.readFile(TALKER_JSON_FILE)
     .then((talkers) => {
       const parsedTalkers = JSON.parse(talkers);
       const talkerById = parsedTalkers.find((talker) => talker.id === parseInt(id, 10));
@@ -35,7 +38,7 @@ exports.getTalkerById = (req, res) => {
       : res.status(HTTP_OK).json(talkerById);
     })
     .catch((error) => {
-      console.error(`Não foi possível ler o arquivo ${TALKER_FILE}. Erro: ${error}`);
+      console.error(LOG_ERROR(error));
       process.exit(1);
     });
 };

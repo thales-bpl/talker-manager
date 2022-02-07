@@ -1,6 +1,8 @@
 const validator = require('email-validator');
 const PasswordValidator = require('password-validator');
 const randtoken = require('rand-token');
+// crédito para Welton Thomas pelos node packages
+// src: https://github.com/tryber/sd-014-b-project-talker-manager/blob/b21fa49586916d8912140711c6e36b4d874f6380/controllers/loginController.js
 
 const HTTP_OK = 200;
 const HTTP_BAD_REQUEST = 400;
@@ -21,7 +23,7 @@ const INVALID_PASSWORD = {
   message: 'O "password" deve ter pelo menos 6 caracteres',
 };
 
-exports.emailAuth = (req, res, next) => {
+exports.authEmail = (req, res, next) => {
   const { email } = req.body;
   const emailCheck = validator.validate(email);
   if (!email) return res.status(HTTP_BAD_REQUEST).json(EMAIL_REQUIRED);
@@ -29,7 +31,7 @@ exports.emailAuth = (req, res, next) => {
   next();
 };
 
-exports.pwAuth = (req, res, next) => {
+exports.authPassword = (req, res, next) => {
   const { password } = req.body;
   const schema = new PasswordValidator();
   schema.is().min(6);
@@ -38,7 +40,7 @@ exports.pwAuth = (req, res, next) => {
   next();
 };
 
-exports.tokenGenerator = (_req, res) => {
+exports.createToken = (_req, res) => {
   const TOKEN = {
     token: randtoken.generate(16),
   };

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { getAllTalkers, getTalkerById } = require('../middlewares/talkerMiddlewares');
+const { getAllTalkers, getTalkerById } = require('../talker/talkerController');
 
 router.get('/', getAllTalkers);
 
