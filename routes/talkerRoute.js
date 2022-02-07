@@ -8,6 +8,7 @@ const {
   postTalker,
   putTalker,
   deleteTalker,
+  queryTalker,
 } = require('../talker/talkerController');
 
 const {
@@ -19,32 +20,31 @@ const {
   validateRate,
 } = require('../talker/talkerService');
 
-router.get('/', getAllTalkers);
+router.get('/search', validateToken, queryTalker);
 
-router.get('/:id', getTalkerById);
+router.route('/:id')
+  .get(getTalkerById)
+  .delete(validateToken, deleteTalker)
+  .put(
+    validateToken,
+    validateName,
+    validateAge,
+    validateTalk,
+    validateWatch,
+    validateRate,
+    putTalker,
+  );
 
-router.delete('/:id', validateToken, deleteTalker);
-
-router.put(
-  '/:id',
-  validateToken,
-  validateName,
-  validateAge,
-  validateTalk,
-  validateWatch,
-  validateRate,
-  putTalker,
-);
-
-router.post(
-  '/',
-  validateToken,
-  validateName,
-  validateAge,
-  validateTalk,
-  validateWatch,
-  validateRate,
-  postTalker,
-);
+router.route('/')
+  .get(getAllTalkers)
+  .post(
+    validateToken,
+    validateName,
+    validateAge,
+    validateTalk,
+    validateWatch,
+    validateRate,
+    postTalker,
+  );
 
 module.exports = router;

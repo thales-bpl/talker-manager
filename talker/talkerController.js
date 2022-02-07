@@ -23,6 +23,9 @@ ${error}`;
 const DELETE_ERROR = (error) => `Unable to delete talker.
 ${error}`;
 
+const QUERY_ERROR = (error) => `Unable to query a talker.
+${error}`;
+
 exports.getAllTalkers = (_req, res) => {
   fs.readFile(TALKER_JSON_FILE)
     .then((talkers) => JSON.parse(talkers))
@@ -81,7 +84,7 @@ exports.putTalker = (req, res) => {
       fs.writeFile(TALKER_JSON_FILE, JSON.stringify([...talkers, newTalker]));
       return newTalker;
     })
-    .then((updtTalkers) => res.status(HTTP_OK).json(updtTalkers))
+    .then((newTalker) => res.status(HTTP_OK).json(newTalker))
     .catch((error) => {
       console.error(PUT_ERROR(error));
       process.exit(1);
@@ -97,6 +100,20 @@ exports.deleteTalker = (req, res) => {
   .then(() => res.status(HTTP_NO_CONTENT).json())
   .catch((error) => {
     console.error(DELETE_ERROR(error));
+    process.exit(1);
+  });
+};
+
+exports.queryTalker = (req, res) => {
+  const { q: query } = req.query;
+  fs.readFile(TALKER_JSON_FILE)
+    .then((talkers) => JSON.parse(talkers))
+    .then((talkers) =>
+      talkers.filter((talker) =>
+        talker.name.toLowerCase().includes(query.toLowerCase())))
+    .then((talker) => res.status(200).json(talker))
+    .catch((error) => {
+    console.error(QUERY_ERROR(error));
     process.exit(1);
   });
 };

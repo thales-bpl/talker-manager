@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const { authEmail, authPassword, createToken } = require('../login/loginService');
+const { validateEmail, validatePassword, createToken } = require('../login/loginService');
 
-router.post('/', authEmail, authPassword, createToken);
+router.post('/', validateEmail, validatePassword, createToken);
 
 module.exports = router;

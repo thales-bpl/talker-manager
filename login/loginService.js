@@ -21,7 +21,7 @@ const INVALID_PASSWORD = {
   message: 'O "password" deve ter pelo menos 6 caracteres',
 };
 
-exports.authEmail = (req, res, next) => {
+exports.validateEmail = (req, res, next) => {
   const { email } = req.body;
   const emailCheck = validator.validate(email);
   if (!email) return res.status(HTTP_BAD_REQUEST).json(EMAIL_REQUIRED);
@@ -29,7 +29,7 @@ exports.authEmail = (req, res, next) => {
   next();
 };
 
-exports.authPassword = (req, res, next) => {
+exports.validatePassword = (req, res, next) => {
   const { password } = req.body;
   const schema = new PasswordValidator();
   schema.is().min(6);
