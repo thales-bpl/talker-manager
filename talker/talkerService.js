@@ -44,7 +44,7 @@ const HTTP_BAD_REQUEST = 400;
 const HTTP_UNAUTHORIZED = 401;
 
 exports.validateToken = (req, res, next) => {
-  const { authorization } = req.header;
+  const { authorization } = req.headers;
   if (!authorization) return res.status(HTTP_UNAUTHORIZED).json(TOKEN_REQUIRED);
   if (authorization.length !== 16) return res.status(HTTP_UNAUTHORIZED).json(INVALID_TOKEN);
   next();
@@ -59,15 +59,15 @@ exports.validateName = (req, res, next) => {
 
 exports.validateAge = (req, res, next) => {
   const { age } = req.body;
-  if (!Number.isInteger(age)) return res.status(HTTP_BAD_REQUEST).json(REJECT_AGE);
   if (!age) return res.status(HTTP_BAD_REQUEST).json(AGE_REQUIRED);
+  if (!Number.isInteger(age)) return res.status(HTTP_BAD_REQUEST).json(REJECT_AGE);
   if (age < 19) return res.status(HTTP_BAD_REQUEST).json(INVALID_AGE);
   next();
 };
 
 exports.validateTalk = (req, res, next) => {
   const { talk } = req.body;
-  if (!(talk && talk.rate && talk.watchAt)) { 
+  if (!(talk && talk.rate && talk.watchedAt)) { 
     return res.status(HTTP_BAD_REQUEST).json(INVALID_TALK);
   }
   next();
