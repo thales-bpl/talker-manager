@@ -16,7 +16,7 @@ Esse projeto simula uma API simples.
 
 ---
 
-### 1 - Crie o endpoint GET `/talker`
+### 1 - Endpoint GET `/talker`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -54,7 +54,7 @@ Esse projeto simula uma API simples.
 - Caso não exista nenhuma pessoa palestrante cadastrada o endpoint deve retornar um array vazio e o `status 200`.
 
 
-### 2 - Crie o endpoint GET `/talker/:id`
+### 2 - Endpoint GET `/talker/:id`
 
 - O endpoint deve retornar uma pessoa palestrante com base no id da rota. Devendo retornar o `status 200` ao fazer uma requisição `/talker/1`, com o seguinte corpo:
 
@@ -75,7 +75,7 @@ Esse projeto simula uma API simples.
   }
   ```
 
-### 3 - Crie o endpoint POST `/login`
+### 3 - Endpoint POST `/login`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -134,7 +134,7 @@ Esse projeto simula uma API simples.
     }
     ```
 
-### 4 - Crie o endpoint POST `/talker`
+### 4 - Endpoint POST `/talker`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -253,7 +253,7 @@ Esse projeto simula uma API simples.
   }
   ```
 
-### 5 - Crie o endpoint PUT `/talker/:id`
+### 5 - Endpoint PUT `/talker/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -372,7 +372,7 @@ Esse projeto simula uma API simples.
   }
   ```
 
-### 6 - Crie o endpoint DELETE `/talker/:id`
+### 6 - Endpoint DELETE `/talker/:id`
 
 #### Os seguintes pontos serão avaliados:
 
@@ -396,7 +396,7 @@ Esse projeto simula uma API simples.
 
 - O endpoint deve deletar uma pessoa palestrante com base no id da rota. Devendo retornar o `status 204`, sem conteúdo na resposta.
 
-### 7 - Crie o endpoint GET `/talker/search?q=searchTerm`
+### 7 - Endpoint GET `/talker/search?q=searchTerm`
 
 #### Os seguintes pontos serão avaliados:
 
