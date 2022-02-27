@@ -18,8 +18,6 @@ Esse projeto simula uma API simples.
 
 ### 1 - Endpoint GET `/talker`
 
-#### Os seguintes pontos serão avaliados:
-
 - O endpoint deve retornar um array com todas as pessoas palestrantes cadastradas. Devendo retornar o `status 200`, com o seguinte corpo:
 
 ```json
