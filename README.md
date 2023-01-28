@@ -1,12 +1,14 @@
-# Boas vindas ao repositório do Talker Manager!
+# Welcome to my Talker Manager project!
 
-Esse projeto simula uma API simples.
+:brazil: Esse projeto foi realizado no curso de full-stack dev da escola de programação Trybe e simula um backend com banco de dados para cadastro e consulta de palestrantes.
+
+:us: This project was done at a full-stack course at Trybe programming school. It simulates a backend with a database for registering and query talkers.
 
 ---
 
-# Sumário
+# Endpoints Summary:
 
-- [1 - GET /talker](#1---crie-o-endpoint-get-talker)
+- [1 - GET /talker](#get-talker)
 - [2 - GET /talker/:id](#2---crie-o-endpoint-get-talkerid)
 - [3 - POST /login](#3---crie-o-endpoint-post-login)
 - [4 - POST /talker](#4---crie-o-endpoint-post-talker)
@@ -16,66 +18,87 @@ Esse projeto simula uma API simples.
 
 ---
 
-### 1 - Endpoint GET `/talker`
+### GET `/talker`
+- Endpoint should return array with all registered talkers. If no talkers are registered, the endpoint returns an empty array.
+- <details>
+  <summary>Success Case</summary>
 
-- O endpoint deve retornar um array com todas as pessoas palestrantes cadastradas. Devendo retornar o `status 200`, com o seguinte corpo:
+  - Expected Status Code: 200.
+  - <details>
+    <summary> Expected json output: </summary>
 
-```json
-[
-  {
-    "name": "Henrique Albuquerque",
-    "age": 62,
-    "id": 1,
-    "talk": { "watchedAt": "23/10/2020", "rate": 5 }
-  },
-  {
-    "name": "Heloísa Albuquerque",
-    "age": 67,
-    "id": 2,
-    "talk": { "watchedAt": "23/10/2020", "rate": 5 }
-  },
-  {
-    "name": "Ricardo Xavier Filho",
-    "age": 33,
-    "id": 3,
-    "talk": { "watchedAt": "23/10/2020", "rate": 5 }
-  },
-  {
-    "name": "Marcos Costa",
-    "age": 24,
-    "id": 4,
-    "talk": { "watchedAt": "23/10/2020", "rate": 5 }
-  }
-]
-```
+    ```json
+    [
+      {
+        "name": "Henrique Albuquerque",
+        "age": 62,
+        "id": 1,
+        "talk": { "watchedAt": "23/10/2020", "rate": 5 }
+      },
+      {
+        "name": "Heloísa Albuquerque",
+        "age": 67,
+        "id": 2,
+        "talk": { "watchedAt": "23/10/2020", "rate": 5 }
+      },
+      {
+        "name": "Ricardo Xavier Filho",
+        "age": 33,
+        "id": 3,
+        "talk": { "watchedAt": "23/10/2020", "rate": 5 }
+      },
+      {
+        "name": "Marcos Costa",
+        "age": 24,
+        "id": 4,
+        "talk": { "watchedAt": "23/10/2020", "rate": 5 }
+      }
+    ]
+    ```
+    </details>
 
-- Caso não exista nenhuma pessoa palestrante cadastrada o endpoint deve retornar um array vazio e o `status 200`.
+  </details>
 
 
-### 2 - Endpoint GET `/talker/:id`
+### GET `/talker/:id`
+- Endpoint should return a single talker.
+- <details>
+  <summary>Success Case</summary>
 
-- O endpoint deve retornar uma pessoa palestrante com base no id da rota. Devendo retornar o `status 200` ao fazer uma requisição `/talker/1`, com o seguinte corpo:
+  - Expected Status Code: 200.
+  - <details>
+    <summary>Expected json output:</summary>
 
-  ```json
-  {
-    "name": "Henrique Albuquerque",
-    "age": 62,
-    "id": 1,
-    "talk": { "watchedAt": "23/10/2020", "rate": 5 }
-  }
-  ```
+    ```json
+    {
+      "name": "Henrique Albuquerque",
+      "age": 62,
+      "id": 1,
+      "talk": { "watchedAt": "23/10/2020", "rate": 5 }
+    }
+    ```
+    </details>
 
-- Caso não seja encontrada uma pessoa palestrante com base no id da rota, o endpoint deve retornar o `status 404` com o seguinte corpo:
+  </details>
 
-  ```json
-  {
-    "message": "Pessoa palestrante não encontrada"
-  }
-  ```
+- <details>
+  <summary>Fail Case</summary>
 
-### 3 - Endpoint POST `/login`
+  - Expected Status Code: 404.
+  - <details>
+    <summary>Expected json output:</summary>
 
-#### Os seguintes pontos serão avaliados:
+    ```json
+    {
+      "message": "Pessoa palestrante não encontrada"
+    }
+    ```
+    </details>
+
+  </details>
+
+
+### POST `/login`
 
 - O endpoint deve ser capaz de retornar um token aleatório de 16 caracteres que deverá ser utilizado nas demais requisições.
 
