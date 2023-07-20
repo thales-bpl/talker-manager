@@ -1,8 +1,8 @@
 # Welcome to my Talker Manager project!
 
-:brazil: Esse projeto foi realizado no curso de full-stack dev da escola de programação Trybe e simula um backend com banco de dados para cadastro e consulta de palestrantes.
+:brazil: Esse projeto foi realizado no curso de full-stack web dev da escola de programação Trybe e simula um backend com banco de dados para cadastro e consulta de palestrantes.
 
-:us: This project was done at a full-stack course at Trybe programming school. It simulates a backend with a database for registering and query talkers.
+:us: This project was developed at a full-stack web dev course at Trybe programming school. It simulates a backend with a database for registering and query talkers.
 
 ---
 
